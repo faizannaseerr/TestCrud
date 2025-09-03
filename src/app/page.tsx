@@ -12,7 +12,7 @@ export default async function Home() {
         <div className="flex justify-end">
           <AddUserBtn />
         </div>
-        <UsersTable />
+        <UsersTable users={users} />
 
       </div>
 

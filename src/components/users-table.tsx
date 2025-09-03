@@ -1,4 +1,3 @@
-import { getUsers } from "@/server/users";
 import {
     Table,
     TableBody,
@@ -12,11 +11,13 @@ import { Button } from "./ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import UpdateUserBtn from "./crud_buttons/update-user-btn";
 import DeleteUserBtn from "./crud_buttons/delete-user-btn";
+import { User } from "@/db/schema";
 
+interface UsersTableProps {
+    users: User[];
+}
 
-
-export default async function UsersTable() {
-    const users = await getUsers();
+export default function UsersTable({ users }: UsersTableProps) {
     return (<Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>

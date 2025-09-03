@@ -19,7 +19,6 @@ import { createUser, updateUser } from "@/server/users"
 import { useState } from "react"
 import { Loader2 } from "lucide-react"
 import { toast } from "sonner"
-import { useRouter } from "next/navigation"
 import { User } from "@/db/schema"
 
 interface UserFormProps {
@@ -33,7 +32,6 @@ const formSchema = z.object({
 })
 
 export default function UserForm({ user, onSuccess }: UserFormProps) {
-    const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
@@ -59,7 +57,6 @@ export default function UserForm({ user, onSuccess }: UserFormProps) {
             }
             form.reset()
             toast.success(`User ${user ? "updated" : "created"} successfully`)
-            router.refresh()
             onSuccess?.()
         } catch (error) {
             toast.error(`Failed to ${user ? "update" : "create"} user`)

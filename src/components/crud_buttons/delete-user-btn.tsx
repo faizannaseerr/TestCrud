@@ -14,7 +14,6 @@ import {
 import { deleteUser } from "@/server/users";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 interface DeleteUserBtnProps {
     userId: string;
@@ -23,7 +22,6 @@ interface DeleteUserBtnProps {
 export default function DeleteUserBtn({ userId }: DeleteUserBtnProps) {
     const [isLoading, setIsLoading] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
-    const router = useRouter()
 
     const handleDelete = async () => {
         try {
@@ -31,9 +29,9 @@ export default function DeleteUserBtn({ userId }: DeleteUserBtnProps) {
             await deleteUser(userId)
             toast.success("User deleted successfully")
             setIsOpen(false)
-            router.refresh()
         } catch (error) {
             console.error(error)
+            toast.error("Failed to delete user")
         } finally {
             setIsLoading(false)
         }
